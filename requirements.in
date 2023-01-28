@@ -1,0 +1,42 @@
+Django<5.0
+django-extensions
+django-health-check
+django-rest-auth
+django-click
+djangorestframework
+environs[django]
+greenlet==2.0.1
+gevent==22.10.2
+django-db-geventpool
+gunicorn
+psycopg2-binary
+whitenoise
+
+# versioning
+bumpversion
+ipython
+
+# ipython
+vinnie
+
+# Logging
+django-tracer
+python-json-logger
+structlog
+django-structlog
+rich
+
+# Celery
+celery
+redis
+
+# Testing
+black
+django-bakery
+django-test-plus
+factory-boy
+interrogate
+pytest
+pytest-cov
+pytest-django
+pytest-xdist
