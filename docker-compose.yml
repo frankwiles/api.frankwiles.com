@@ -19,8 +19,6 @@ services:
     env_file:
       - .env
     init: true
-    profiles:
-      - celery
     volumes:
       - .:/code
     stop_signal: SIGKILL
@@ -43,8 +41,6 @@ services:
     env_file:
       - .env
     init: true
-    profiles:
-      - celery
     volumes:
       - .:/code
     stop_signal: SIGKILL

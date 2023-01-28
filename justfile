@@ -73,32 +73,32 @@ bootstrap:
 # ----------------------------------------------------------------
 
 @build:
-    docker-compose build
+    docker compose build
 
 @down:
-    docker-compose down
+    docker compose down
 
 @logs *ARGS:
-    docker-compose logs {{ ARGS }}
+    docker compose logs {{ ARGS }}
 
 @rebuild:
     docker compose rm --force web
     docker compose build --force-rm
 
 @restart *ARGS:
-    docker-compose restart {{ ARGS }}
+    docker compose restart {{ ARGS }}
 
 @start +ARGS="--detach":
     just server {{ ARGS }}
 
 @stop:
-    docker-compose down
+    docker compose down
 
 @tail:
     just logs --follow --tail 100
 
 @up *ARGS:
-    docker-compose up {{ ARGS }}
+    docker compose up {{ ARGS }}
 
 # ----------------------------------------------------------------
 # Everything else
@@ -106,7 +106,7 @@ bootstrap:
 
 # Compile new python dependencies
 @pip-compile *ARGS:
-    docker-compose run \
+    docker compose run \
         --entrypoint= \
         --rm web \
             bash -c "pip-compile {{ ARGS }} ./requirements.in \

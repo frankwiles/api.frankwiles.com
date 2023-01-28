@@ -65,7 +65,6 @@ INSTALLED_APPS = [
 
 # Third-party apps
 INSTALLED_APPS += [
-    "rest_framework",
     "django_extensions",
     "health_check",
     "health_check.db",

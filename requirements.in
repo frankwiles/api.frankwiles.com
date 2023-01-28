@@ -1,9 +1,8 @@
 Django<5.0
 django-extensions
 django-health-check
-django-rest-auth
 django-click
-djangorestframework
+django-ninja
 environs[django]
 greenlet==2.0.1
 gevent==22.10.2
