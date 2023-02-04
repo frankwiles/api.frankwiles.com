@@ -73,7 +73,7 @@ INSTALLED_APPS += [
 ]
 
 # Our Apps
-INSTALLED_APPS += ["ak", "users"]
+INSTALLED_APPS += ["ak", "users", "counters", "core"]
 
 
 #############################################################################

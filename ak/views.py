@@ -18,7 +18,10 @@ class HomepageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        logger.info("homepage", foo="bar")
+        if self.request.user.is_authenticated:
+            logger.info("homepage", auth=True, email=self.request.user.email)
+        else:
+            logger.info("homepage", auth=False)
         return context
 
 

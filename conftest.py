@@ -4,6 +4,8 @@ import pytest
 
 logging.disable(logging.CRITICAL)
 
+from counters.tests.fixtures import *
+
 
 @pytest.fixture(autouse=True)
 def use_test_settings(settings):

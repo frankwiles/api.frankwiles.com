@@ -8,7 +8,9 @@ from ak.views import (
     OKView,
 )
 
-from users.api_views import api
+import users.api_views
+import counters.api_views
+from core.api import api
 
 urlpatterns = [
     path("", HomepageView.as_view(), name="home"),

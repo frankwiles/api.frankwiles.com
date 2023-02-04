@@ -1,9 +1,8 @@
-from ninja import NinjaAPI, ModelSchema
+from ninja import ModelSchema
 from ninja.security import django_auth
 
+from core.api import api
 from .models import User
-
-api = NinjaAPI(csrf=True)
 
 
 class UserSchema(ModelSchema):
@@ -22,6 +21,6 @@ class UserSchema(ModelSchema):
         ]
 
 
-@api.get("user/me/", auth=django_auth, response=UserSchema)
+@api.get("users/me/", auth=django_auth, response=UserSchema)
 def me(request):
     return request.user
