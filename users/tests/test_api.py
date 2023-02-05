@@ -8,7 +8,7 @@ def test_user_me(db, tp):
     u.set_password("password")
     u.save()
     with tp.login(u):
-        res = tp.get("/api/user/me/", headers={"Accept": "application/json"})
+        res = tp.get("/api/users/me/", headers={"Accept": "application/json"})
         tp.response_200(res)
         data = res.json()
         assert data["email"] == u.email

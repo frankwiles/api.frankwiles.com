@@ -1,7 +1,7 @@
 import datetime
 import math
 
-from typing import List
+from typing import List, Optional
 
 from django.db.models import Avg, Count, Sum
 from django.db.models.functions import TruncDay
@@ -15,15 +15,15 @@ from .models import Counter, CounterType
 
 
 class DayCount(Schema):
-    date: datetime.datetime
-    count: int
+    date: Optional[datetime.datetime]
+    count: Optional[int]
 
 
 class CounterSummary(Schema):
     """Model for our summary data"""
 
     today_count: int
-    latest_counter: DayCount
+    latest_counter: Optional[DayCount]
     last_7_days_counts: list[DayCount]
     last_7_day_average: int
     last_30_days_counts: list[DayCount]
@@ -70,9 +70,11 @@ def counter_summary(counter_type):
         .annotate(count=Sum("count"))
         .order_by("-date")
     )
-    last_7_day_average = math.ceil(
-        sum([x["count"] for x in last_7_days]) / len(last_7_days)
-    )
+    last_7_day_average = 0
+    if len(last_7_days):
+        last_7_day_average = math.ceil(
+            sum([x["count"] for x in last_7_days]) / len(last_7_days)
+        )
 
     # Last 30 days counts
     last_30_days = (
@@ -82,15 +84,18 @@ def counter_summary(counter_type):
         .annotate(count=Sum("count"))
         .order_by("-date")
     )
-    last_30_day_average = math.ceil(
-        sum([x["count"] for x in last_30_days]) / len(last_30_days)
-    )
+    last_30_day_average = 0
+
+    if len(last_30_days):
+        last_30_day_average = math.ceil(
+            sum([x["count"] for x in last_30_days]) / len(last_30_days)
+        )
 
     return {
         "today_count": today_count,
         "latest_counter": {
-            "date": latest_count.created,
-            "count": latest_count.count,
+            "date": latest_count and latest_count.created,
+            "count": latest_count and latest_count.count,
         },
         "last_7_days_counts": [
             {"date": x["date"], "count": x["count"]} for x in last_7_days

@@ -4,6 +4,7 @@ import pytest
 
 logging.disable(logging.CRITICAL)
 
+from users.tests.fixtures import *
 from counters.tests.fixtures import *
 
 

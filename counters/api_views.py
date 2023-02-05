@@ -15,9 +15,9 @@ def summary(request, slug: str):
 
 
 @api.post("counters/", auth=django_auth, response=CounterResponse)
-def create_counter(request, payload: CounterCreate):
-    t = get_object_or_404(CounterType, slug=payload.type_slug)
-    c = Counter.objects.make_count(type_obj=t, count=payload.count)
+def create_counter(request, item: CounterCreate):
+    t = get_object_or_404(CounterType, slug=item.type_slug)
+    c = Counter.objects.make_count(type_obj=t, count=item.count)
     print(t)
     print(c)
     return c
