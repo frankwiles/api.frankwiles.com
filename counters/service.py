@@ -7,7 +7,8 @@ from django.db.models import Avg, Count, Sum
 from django.db.models.functions import TruncDay
 from django.utils import timezone
 
-from ninja import Schema
+from ninja import Schema, ModelSchema
+from pydantic import ValidationError, validator
 
 from core.dates import midnight_today, seven_days_ago, thirty_days_ago
 from .models import Counter, CounterType
@@ -100,3 +101,24 @@ def counter_summary(counter_type):
         ],
         "last_30_day_average": last_30_day_average,
     }
+
+
+class CounterResponse(ModelSchema):
+    """Response schema for counter apis"""
+
+    class Config:
+        model = Counter
+        model_fields = (
+            "id",
+            "type",
+            "count",
+            "created",
+            "modified",
+        )
+
+
+class CounterCreate(Schema):
+    """Schema for creating a new counter"""
+
+    type_slug: str
+    count = 1

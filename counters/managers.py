@@ -29,7 +29,9 @@ class CounterManager(models.Manager):
 
     def make_count(self, type_obj, count=1):
         """Create a new count obj"""
-        return self.model(type=type_obj, count=count).save()
+        obj = self.model(type=type_obj, count=count)
+        obj.save()
+        return obj
 
     def today(self, type_obj):
         now = timezone.now()
