@@ -6,18 +6,19 @@
     <link rel="icon" type="image/svg+xml" href="/static/beard.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>api.frankwiles.com</title>
+    {% if debug %}
     <script type="module">
-        import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+        import RefreshRuntime from 'http://localhost:5173/static/@react-refresh'
         RefreshRuntime.injectIntoGlobalHook(window)
         window.$RefreshReg$ = () => {}
         window.$RefreshSig$ = () => (type) => type
         window.__vite_plugin_react_preamble_installed__ = true
     </script>
-
+    {% endif %}
     {% vite_hmr_client %}
     {% vite_asset 'src/main.jsx' %}
   </head>
-  <body>
+  <body class="m-6 bg-gray-700">
     <div id="root"></div>
   </body>
 </html>

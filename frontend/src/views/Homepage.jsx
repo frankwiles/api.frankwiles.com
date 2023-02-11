@@ -15,8 +15,9 @@ function Homepage() {
   };
 
   return (
-    <div className="m-6">
-      <h1 className="text-gray-300 text-4xl">homepage</h1>
+    <div className="m-6 bg-gray-700">
+      <h1 className="text-gray-300 text-4xl">Frank's Homepage</h1>
+      <p>blahblah blah</p>
       <p>blahblah blah</p>
     </div>
   )

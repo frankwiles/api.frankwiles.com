@@ -4,7 +4,6 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'vite/modulepreload-polyfill';
-import App from './App'
 import Homepage from './views/Homepage'
 import './index.css'
 
@@ -12,8 +11,7 @@ import './index.css'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<App />} />
-      <Route path="homepage" element={<Homepage />} />
+      <Route path="/homepage/" element={<Homepage />} />
     </>
   )
 );

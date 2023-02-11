@@ -1,5 +1,6 @@
 import structlog
 
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponse
 from django.views import View
@@ -10,6 +11,11 @@ logger = structlog.get_logger(__name__)
 
 class FrontendView(TemplateView):
     template_name = "frontend.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["debug"] = settings.DEBUG
+        return context
 
 
 class HomepageView(TemplateView):
