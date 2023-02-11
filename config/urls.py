@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.contrib import admin
 from ak.views import (
     FrontendView,
@@ -15,7 +15,7 @@ from core.api import api
 
 urlpatterns = [
     path("", HomepageView.as_view(), name="home"),
-    path("homepage/", FrontendView.as_view(), name="frontend"),
+    re_path("^homepage/", FrontendView.as_view(), name="frontend"),
     path("api/", api.urls),
     path("admin/", admin.site.urls),
     path("200", OKView.as_view(), name="ok"),

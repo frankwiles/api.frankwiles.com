@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'vite/modulepreload-polyfill';
 import Homepage from './views/Homepage'
+import Counters from './views/Counters'
 import './index.css'
 
 
@@ -12,6 +13,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/homepage/" element={<Homepage />} />
+      <Route path="/homepage/counters/" element={<Counters />} />
     </>
   )
 );
