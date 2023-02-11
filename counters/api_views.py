@@ -18,6 +18,4 @@ def summary(request, slug: str):
 def create_counter(request, item: CounterCreate):
     t = get_object_or_404(CounterType, slug=item.type_slug)
     c = Counter.objects.make_count(type_obj=t, count=item.count)
-    print(t)
-    print(c)
     return c
