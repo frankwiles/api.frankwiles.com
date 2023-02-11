@@ -164,6 +164,7 @@ django==4.1.5 \
     #   django-health-check
     #   django-ninja
     #   django-structlog
+    #   django-vite
     #   model-bakery
 django-cache-url==3.4.4 \
     --hash=sha256:5ca4760b4580b80e41279bc60d1e5c16a822e4e462265faab0a330701bb0ef9a \
@@ -203,6 +204,10 @@ django-test-plus==2.2.1 \
     # via -r ./requirements.in
 django-tracer==0.9.3 \
     --hash=sha256:1f1b6dc228a45992b0df966cf348208e30254ecf3c188641fbb3671b90698374
+    # via -r ./requirements.in
+django-vite==2.0.2 \
+    --hash=sha256:5a2e11a9f08a2a0a69c9a7c637a3254ad0c8dd01e07cb40de09a3a180ed99791 \
+    --hash=sha256:f11f4747183b884ee4e6c2ea12f0aa96a846574ee7344c05ac96b4fa89309535
     # via -r ./requirements.in
 environs[django]==9.5.0 \
     --hash=sha256:1e549569a3de49c05f856f40bce86979e7d5ffbbc4398e7f338574c220189124 \

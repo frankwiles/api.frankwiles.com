@@ -70,6 +70,7 @@ INSTALLED_APPS += [
     "health_check.db",
     "health_check.cache",
     "health_check.contrib.celery",
+    "django_vite",
 ]
 
 # Our Apps
@@ -167,7 +168,10 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 # Additional directories from where we should collect static files from
-STATICFILES_DIRS = [BASE_DIR.joinpath("static").as_posix()]
+STATICFILES_DIRS = [
+    BASE_DIR.joinpath("static").as_posix(),
+    BASE_DIR.joinpath("frontend/static/").as_posix(),
+]
 
 # This is the directory where all of the collected static files are put
 # after running collectstatic
@@ -289,3 +293,10 @@ EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("DJANGO_EMAIL_HOST_USER", default="")
 EMAIL_PORT = env.int("DJANGO_EMAIL_PORT", default=25)
 EMAIL_USE_TLS = env.bool("DJANGO_EMAIL_USE_TLS", default=False)
+
+#############################################################################
+# ViteJS Settings
+#############################################################################
+DJANGO_VITE_DEV_MODE = True
+DJANGO_VITE_DEV_SERVER_PORT = 5173
+DJANGO_VITE_ASSETS_PATH = BASE_DIR.joinpath("frontend/public/").as_posix()

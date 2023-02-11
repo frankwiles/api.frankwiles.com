@@ -8,6 +8,10 @@ from django.views.generic import TemplateView
 logger = structlog.get_logger(__name__)
 
 
+class FrontendView(TemplateView):
+    template_name = "frontend.html"
+
+
 class HomepageView(TemplateView):
     """
     Our default homepage for AlphaKit.  We expect you to not use this view

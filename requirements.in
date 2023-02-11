@@ -25,6 +25,9 @@ structlog
 django-structlog
 rich
 
+# Frontend (Vitejs)
+django-vite
+
 # Celery
 celery
 redis

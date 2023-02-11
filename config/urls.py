@@ -1,6 +1,7 @@
 from django.urls import include, path
 from django.contrib import admin
 from ak.views import (
+    FrontendView,
     HomepageView,
     ForbiddenView,
     InternalServerErrorView,
@@ -14,6 +15,7 @@ from core.api import api
 
 urlpatterns = [
     path("", HomepageView.as_view(), name="home"),
+    path("homepage/", FrontendView.as_view(), name="frontend"),
     path("api/", api.urls),
     path("admin/", admin.site.urls),
     path("200", OKView.as_view(), name="ok"),
@@ -22,3 +24,5 @@ urlpatterns = [
     path("500", InternalServerErrorView.as_view(), name="internal_server_error"),
     path("health/", include("health_check.urls")),
 ]
+
+admin.site.site_header = "api.frankwiles.com"
