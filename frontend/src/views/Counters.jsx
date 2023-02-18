@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
-import { parseISO, differenceInSeconds, differenceInMinutes, differenceInHours } from 'date-fns'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { getMe, userQuerySettings } from '@/queries/auth'
 import { getCounterSummary, counterSummaryQuerySettings } from '@/queries/counters'
+import TimeSince from '@/components/TimeSince'
 
 const LastLozenge = (props) => {
   const { lastLozenge } = props
-  const now = new Date();
-  const last = parseISO(lastLozenge.date);
+  const ref = useRef(null);
+  const [compareDate, setCompareDate] = useState(new Date());
 
-  const hours = differenceInHours(now, last);
-  const minutes = differenceInMinutes(now, last);
-  const seconds = differenceInSeconds(now, last);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCompareDate(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [lastLozenge]);
 
   return (
     <div className="text-gray-400">
-      <p className="text-lg">Last lozenge was {hours}:{minutes}:{seconds} ago</p>
+      <p className="text-lg">Last lozenge was <TimeSince from={lastLozenge.date} to={compareDate} /> ago</p>
     </div>
   )
 }
@@ -31,7 +34,7 @@ const CountButton = (props) => {
 
   return (
     <button
-      className="mt-4 bg-gray-500 hover:bg-gray-700 text-gray-200 font-bold py-4 px-6 rounded"
+      className="mt-4 bg-gray-500 hover:bg-gray-700 text-gray-200 font-bold py-4 px-6 border-solid border-2 border-slate-800 rounded"
       onClick={() => mutation.mutate({ count: 1, type_slug: slug })}
     >
       {name}
@@ -43,15 +46,6 @@ const Counters = (props) => {
   const user = useQuery('me', getMe, userQuerySettings)
   const lozenges = useQuery('lozenge-summary', () => getCounterSummary('lozenge'), counterSummaryQuerySettings)
   const queryClient = useQueryClient()
-
-  if (user.isLoading || lozenges.isLoading) {
-    return <div>Loading...</div>
-  }
-
-  // Redirect to Django admin if we aren't logged in
-  if (user.isError) {
-    window.location.href = '/admin/';
-  }
 
   const addLozenge = useMutation((data) => {
     return fetch('/api/counters/', {
@@ -71,6 +65,14 @@ const Counters = (props) => {
   }
   );
 
+  if (user.isLoading || lozenges.isLoading) {
+    return <div>Loading...</div>
+  }
+
+  // Redirect to Django admin if we aren't logged in
+  if (user.isError) {
+    window.location.href = '/admin/';
+  }
 
   return (
     <div className="m-6 bg-gray-700">

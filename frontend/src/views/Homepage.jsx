@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { getMe, userQuerySettings } from '@/queries/auth'
+import { Link } from "react-router-dom"
 
 function Homepage() {
   const user = useQuery('me', getMe, userQuerySettings);
@@ -17,8 +18,11 @@ function Homepage() {
   return (
     <div className="m-6 bg-gray-700">
       <h1 className="text-gray-300 text-4xl">Frank's Homepage</h1>
-      <p>blahblah blah</p>
-      <p>blahblah blah</p>
+      <p className="my-6">
+        <Link
+          to="/homepage/counters/"
+          className="text-lg text-gray-400 underline hover:text-gray-200">Counters</Link>
+      </p>
     </div>
   )
 }

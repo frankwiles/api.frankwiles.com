@@ -32,11 +32,6 @@ bootstrap:
         cp .env-dist .env
     fi
 
-    # if [ ! -f "docker-compose.override.yml" ]; then
-    #     echo "docker-compose.override.yml created"
-    #     cp docker-compose.override.yml-dist docker-compose.override.yml
-    # fi
-
     docker compose build --force-rm
 
 # TODO: might remove this if we don't use it...
