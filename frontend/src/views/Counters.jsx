@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { getMe, userQuerySettings } from '@/queries/auth'
 import { getCounterSummary, counterSummaryQuerySettings } from '@/queries/counters'
+import { HeaderContainer, Header, Breadcrumbs } from '@/components/PageHeader'
 import TimeSince from '@/components/TimeSince'
 
 const LastLozenge = (props) => {
@@ -75,8 +76,15 @@ const Counters = (props) => {
   }
 
   return (
-    <div className="m-6 bg-gray-700">
-      <h1 className="text-gray-300 text-4xl mb-4">Counters</h1>
+    <div className="m-6">
+      <div className="mb-6">
+        <Breadcrumbs items={[
+          { linkText: 'Home', url: '/homepage/' },
+        ]} />
+        <HeaderContainer>
+          <Header title="Counters" />
+        </HeaderContainer>
+      </div>
       <LastLozenge lastLozenge={lozenges.data.latest_counter} />
       <CountButton name="Lozenge" slug="lozenge" mutation={addLozenge} />
     </div>
